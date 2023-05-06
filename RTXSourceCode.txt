@@ -1,0 +1,223 @@
+using System;
+using BepInEx;
+using UnityEngine;
+using UnityEngine.Experimental.Rendering;
+using UnityEngine.Rendering;
+using Utilla;
+
+namespace GorillaShaders
+{
+	// Token: 0x02000003 RID: 3
+	[BepInDependency("org.legoandmars.gorillatag.utilla", "1.5.0")]
+	[BepInPlugin("com.rizzler.shader", "Shader", "1.0.0")]
+	public class Plugin : BaseUnityPlugin
+	{
+		// Token: 0x06000006 RID: 6 RVA: 0x000020C4 File Offset: 0x000002C4
+		private void Start()
+		{
+			Events.GameInitialized += this.OnGameInitialized;
+		}
+
+		// Token: 0x06000007 RID: 7 RVA: 0x000020D7 File Offset: 0x000002D7
+		private void OnGameInitialized(object sender, EventArgs e)
+		{
+			this.GorillaShader(GorillaTagger.Instance.offlineVRRig);
+			this.GorillaShader2(GorillaTagger.Instance.offlineVRRig);
+		}
+
+		// Token: 0x06000008 RID: 8 RVA: 0x00002150 File Offset: 0x00000350
+		private void GorillaShader(VRRig player)
+		{
+			Light light = new GameObject
+			{
+				transform = 
+				{
+					parent = player.transform,
+					localPosition = new Vector3(-0.1f, 0.9f, 0.3f)
+				},
+				name = "GorillaShaders"
+			}.AddComponent<Light>();
+			light.range = 20f;
+			light.intensity = 1f;
+			foreach (Renderer renderer in Resources.FindObjectsOfTypeAll<Renderer>())
+			{
+				foreach (VRRig vrrig in GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>())
+				{
+					if (!vrrig.gameObject.GetComponentInChildren<Light>())
+					{
+						this.GorillaShader(vrrig);
+						this.GorillaShader2(vrrig);
+						SkinnedMeshRenderer skinnedMeshRenderer = new SkinnedMeshRenderer();
+						RayTracingAccelerationStructure rayTracingAccelerationStructure = new RayTracingAccelerationStructure();
+						skinnedMeshRenderer.forceMatrixRecalculationPerRender = true;
+						rayTracingAccelerationStructure.Build();
+						rayTracingAccelerationStructure.Update();
+						MeshRenderer meshRenderer = new MeshRenderer();
+						meshRenderer.forceRenderingOff = false;
+						meshRenderer.receiveShadows = true;
+						meshRenderer.rayTracingMode = RayTracingMode.DynamicGeometry;
+						meshRenderer.shadowCastingMode = ShadowCastingMode.On;
+						renderer.enabled = true;
+						renderer.rayTracingMode = RayTracingMode.DynamicGeometry;
+						renderer.receiveShadows = true;
+						renderer.realtimeLightmapIndex = 99999;
+						renderer.shadowCastingMode = ShadowCastingMode.On;
+						GorillaLightmapData gorillaLightmapData = new GorillaLightmapData();
+						gorillaLightmapData.lights.Initialize();
+						gorillaLightmapData.lightTextures.Initialize();
+						gorillaLightmapData.enabled = true;
+						gorillaLightmapData.gameObject.active = true;
+						new LightmapData();
+						BakeryDirectLight bakeryDirectLight = new BakeryDirectLight();
+						Behaviour behaviour = new BakeryLightMesh();
+						new BakeryPointLight();
+						behaviour.enabled = true;
+						bakeryDirectLight.shadowSpread = 9999f;
+						bakeryDirectLight.enabled = true;
+						light.bounceIntensity = 9999f;
+						light.enabled = true;
+						light.intensity = 2f;
+						light.shadowStrength = 99999f;
+						QualitySettings.masterTextureLimit = 999;
+						QualitySettings.pixelLightCount = 999;
+						QualitySettings.realtimeReflectionProbes = true;
+						QualitySettings.maxQueuedFrames = 999;
+						QualitySettings.shadowDistance = 9f;
+						QualitySettings.vSyncCount = 999;
+						string name = renderer.sharedMaterial.mainTexture.name;
+						string name2 = renderer.sharedMaterial.name;
+						renderer.sharedMaterial.mainTexture.filterMode = FilterMode.Bilinear;
+						renderer.sharedMaterial.mainTexture.name = name;
+						renderer.sharedMaterial.name = name2;
+					}
+				}
+			}
+		}
+
+		// Token: 0x0600000A RID: 10 RVA: 0x000023A0 File Offset: 0x000005A0
+		private void gay()
+		{
+			foreach (Renderer renderer in Resources.FindObjectsOfTypeAll<Renderer>())
+			{
+				VRRig[] componentsInChildren = GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>();
+				for (int j = 0; j < componentsInChildren.Length; j++)
+				{
+					if (!componentsInChildren[j].gameObject.GetComponentInChildren<Light>())
+					{
+						Light light = new Light();
+						SkinnedMeshRenderer skinnedMeshRenderer = new SkinnedMeshRenderer();
+						RayTracingAccelerationStructure rayTracingAccelerationStructure = new RayTracingAccelerationStructure();
+						skinnedMeshRenderer.forceMatrixRecalculationPerRender = true;
+						rayTracingAccelerationStructure.Build();
+						rayTracingAccelerationStructure.Update();
+						MeshRenderer meshRenderer = new MeshRenderer();
+						meshRenderer.forceRenderingOff = false;
+						meshRenderer.receiveShadows = true;
+						meshRenderer.rayTracingMode = RayTracingMode.DynamicGeometry;
+						meshRenderer.shadowCastingMode = ShadowCastingMode.On;
+						renderer.enabled = true;
+						renderer.rayTracingMode = RayTracingMode.DynamicGeometry;
+						renderer.receiveShadows = true;
+						renderer.realtimeLightmapIndex = 99999;
+						renderer.shadowCastingMode = ShadowCastingMode.On;
+						GorillaLightmapData gorillaLightmapData = new GorillaLightmapData();
+						gorillaLightmapData.lights.Initialize();
+						gorillaLightmapData.lightTextures.Initialize();
+						gorillaLightmapData.enabled = true;
+						gorillaLightmapData.gameObject.active = true;
+						new LightmapData();
+						BakeryDirectLight bakeryDirectLight = new BakeryDirectLight();
+						Behaviour behaviour = new BakeryLightMesh();
+						new BakeryPointLight();
+						behaviour.enabled = true;
+						bakeryDirectLight.shadowSpread = 9999f;
+						bakeryDirectLight.enabled = true;
+						light.bounceIntensity = 9999f;
+						light.enabled = true;
+						light.intensity = 2f;
+						light.shadowStrength = 99999f;
+						QualitySettings.masterTextureLimit = 999;
+						QualitySettings.pixelLightCount = 999;
+						QualitySettings.realtimeReflectionProbes = true;
+						QualitySettings.maxQueuedFrames = 999;
+						QualitySettings.shadowDistance = 9f;
+						QualitySettings.vSyncCount = 999;
+						string name = renderer.sharedMaterial.mainTexture.name;
+						string name2 = renderer.sharedMaterial.name;
+						renderer.sharedMaterial.mainTexture.filterMode = FilterMode.Bilinear;
+						renderer.sharedMaterial.mainTexture.name = name;
+						renderer.sharedMaterial.name = name2;
+					}
+				}
+			}
+		}
+
+		// Token: 0x0600000B RID: 11 RVA: 0x00002580 File Offset: 0x00000780
+		private void GorillaShader2(VRRig player)
+		{
+			foreach (Renderer renderer in Resources.FindObjectsOfTypeAll<Renderer>())
+			{
+				VRRig[] componentsInChildren = GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>();
+				for (int j = 0; j < componentsInChildren.Length; j++)
+				{
+					if (!componentsInChildren[j].gameObject.GetComponentInChildren<Light>())
+					{
+						Light light = new GameObject
+						{
+							transform = 
+							{
+								parent = player.transform,
+								localPosition = new Vector3(-0.1f, 0.9f, 0.3f)
+							},
+							name = "GorillaShaders"
+						}.AddComponent<Light>();
+						light.range = 20f;
+						light.intensity = 1f;
+						SkinnedMeshRenderer skinnedMeshRenderer = new SkinnedMeshRenderer();
+						RayTracingAccelerationStructure rayTracingAccelerationStructure = new RayTracingAccelerationStructure();
+						skinnedMeshRenderer.forceMatrixRecalculationPerRender = true;
+						rayTracingAccelerationStructure.Build();
+						rayTracingAccelerationStructure.Update();
+						MeshRenderer meshRenderer = new MeshRenderer();
+						meshRenderer.forceRenderingOff = false;
+						meshRenderer.receiveShadows = true;
+						meshRenderer.rayTracingMode = RayTracingMode.DynamicGeometry;
+						meshRenderer.shadowCastingMode = ShadowCastingMode.On;
+						renderer.enabled = true;
+						renderer.rayTracingMode = RayTracingMode.DynamicGeometry;
+						renderer.receiveShadows = true;
+						renderer.realtimeLightmapIndex = 99999;
+						renderer.shadowCastingMode = ShadowCastingMode.On;
+						GorillaLightmapData gorillaLightmapData = new GorillaLightmapData();
+						gorillaLightmapData.lights.Initialize();
+						gorillaLightmapData.lightTextures.Initialize();
+						gorillaLightmapData.enabled = true;
+						gorillaLightmapData.gameObject.active = true;
+						new LightmapData();
+						BakeryDirectLight bakeryDirectLight = new BakeryDirectLight();
+						Behaviour behaviour = new BakeryLightMesh();
+						new BakeryPointLight();
+						behaviour.enabled = true;
+						bakeryDirectLight.shadowSpread = 9999f;
+						bakeryDirectLight.enabled = true;
+						light.bounceIntensity = 9999f;
+						light.enabled = true;
+						light.intensity = 2f;
+						light.shadowStrength = 99999f;
+						QualitySettings.masterTextureLimit = 999;
+						QualitySettings.pixelLightCount = 999;
+						QualitySettings.realtimeReflectionProbes = true;
+						QualitySettings.maxQueuedFrames = 999;
+						QualitySettings.shadowDistance = 9f;
+						QualitySettings.vSyncCount = 999;
+						string name = renderer.sharedMaterial.mainTexture.name;
+						string name2 = renderer.sharedMaterial.name;
+						renderer.sharedMaterial.mainTexture.filterMode = FilterMode.Bilinear;
+						renderer.sharedMaterial.mainTexture.name = name;
+						renderer.sharedMaterial.name = name2;
+					}
+				}
+			}
+		}
+	}
+}
